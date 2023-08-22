@@ -11,13 +11,15 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 
+use Filament\Tables\Filters\Filter;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\TextColumn;
 
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PengajuanResource\Pages;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
@@ -133,7 +135,7 @@ class PengajuanResource extends Resource
 
     public static function table(Table $table): Table
     {
-     
+        
         return $table
         ->poll('10s')
         ->modifyQueryUsing(fn (Builder $query) => $query->withoutGlobalScopes())
@@ -181,9 +183,25 @@ class PengajuanResource extends Resource
         
         
             ->filters([
-             
+                Filter::make('created_at')
+                ->form([
+                    DatePicker::make('Dari'),
+                    DatePicker::make('Sampai'),
+                ])
+                ->query(function (Builder $query, array $data): Builder {
+                    return $query
+                        ->when(
+                            $data['Dari'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                        )
+                        ->when(
+                            $data['Sampai'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                        );
+                })
             ])
             ->actions([
+                
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

@@ -14,9 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::redirect('/', '/admin/login', 301);
 
 Route::get('formpengajuan', [App\Http\Controllers\CetakFormPengajuan::class, 'index'])->name('form-pemeriksaan.cetak');
 Route::get('bukticair', [App\Http\Controllers\CetakFormPengajuan::class, 'bukticair'])->name('form-bukticair.cetak');

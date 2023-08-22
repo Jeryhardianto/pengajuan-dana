@@ -11,9 +11,11 @@ use Filament\Forms\Form;
 use App\Models\Pengajuan;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Tables\Filters\Filter;
 use Illuminate\Support\Facades\Auth;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Forms\Components\DatePicker;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\LaporanResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -28,8 +30,6 @@ class LaporanResource extends Resource
     protected static ?string $navigationGroup = 'Form Pengajuan';
     protected static ?string $navigationLabel = 'Laporan';
     protected static ?int $navigationSort = 2;
-    // protected static ?string $recordTitleAttribute = 'Laporan';
-
     public static function form(Form $form): Form
     {
         return $form
@@ -85,6 +85,22 @@ class LaporanResource extends Resource
         
         
             ->filters([
+                Filter::make('created_at')
+                ->form([
+                    DatePicker::make('Dari'),
+                    DatePicker::make('Sampai'),
+                ])
+                ->query(function (Builder $query, array $data): Builder {
+                    return $query
+                        ->when(
+                            $data['Dari'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                        )
+                        ->when(
+                            $data['Sampai'],
+                            fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                        );
+                })
              
             ])
             ->actions([
@@ -118,12 +134,12 @@ class LaporanResource extends Resource
             'create' => Pages\CreateLaporan::route('/create'),
             'edit' => Pages\EditLaporan::route('/{record}/edit'),
         ];
-    }   
+    }
 
     public static function getLabel(): ?string
     {
         return "Laporan";
-    } 
+    }
 
     public static function getEloquentQuery(): Builder
     {

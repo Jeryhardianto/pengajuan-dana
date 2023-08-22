@@ -66,6 +66,37 @@
 
   </tbody>
   </table>
-  
+  <br><br><br>
+  <table style="border-collapse: collapse; width: 100%; font-size:14px" border="1">
+    <thead>
+      <tr >
+   
+        <th>Finance</th>
+        <th>Direktur</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr style="text-align: center">
+    <td>
+     <br>
+     
+     <br><br>
+   </td>
+    <td>
+     <br>
+    
+     <br><br>
+   </td>
+ 
+ 
+   
+    </tr>
+    <tr style="text-align: center">
+     <td>Finance</td>
+     <td>Direktur</td>
+     </tr>
+    
+    </tbody>
+    </table>
 </body>
 </html>

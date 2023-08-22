@@ -5,7 +5,7 @@
  <link rel="icon" type="image/x-icon" href="{{ asset('image/favicon1.png') }}">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <meta http-equiv="X-UA-Compatible" content="ie=edge">
- <title>Cetak Pengajuan Dana - {{ $pengajuan->user->name }}</title>
+ <title>Cetak Pencairan Dana - {{ $pengajuan->user->name }}</title>
  <style>
    body{
 
@@ -80,8 +80,8 @@
      <tr >
        <th>Pemohon</th>
        <th>Diterima Oleh</th>
-       <th>SPV Finance</th>
-       <th>Finane HO</th>
+       <th>Finance</th>
+       <th>Direktur</th>
      </tr>
    </thead>
    <tbody>
@@ -111,8 +111,8 @@
    <tr style="text-align: center">
     <td>{{ $pengajuan->user->name }}</td>
     <td>{{ $pengajuan->user->name }}</td>
-    <td>SPV Finance</td>
-    <td>Finance HO</td>
+    <td>Finance</td>
+    <td>Direktur</td>
     </tr>
    
    </tbody>
