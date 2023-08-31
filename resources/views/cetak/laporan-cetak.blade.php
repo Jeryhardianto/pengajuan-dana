@@ -8,7 +8,6 @@
  <title>Laporan</title>
  <style>
    body{
-
      margin: 5px 50px 15px 50px
    }
  </style>
@@ -84,18 +83,13 @@
    </td>
     <td>
      <br>
-    
      <br><br>
    </td>
- 
- 
-   
     </tr>
     <tr style="text-align: center">
      <td>Finance</td>
      <td>Direktur</td>
      </tr>
-    
     </tbody>
     </table>
 </body>

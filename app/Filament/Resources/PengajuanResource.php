@@ -122,7 +122,6 @@ class PengajuanResource extends Resource
                         ->columns(2)
 
                 ]),
-
           
            
             ]);
@@ -246,6 +245,9 @@ class PengajuanResource extends Resource
            return parent::getEloquentQuery()->where('user_id', auth()->id());
        }
     }
+
+
+  
 
  
 
