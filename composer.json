@@ -28,7 +28,7 @@
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
-        "files": ["app/helper/FormatUang.php"],
+        "files": ["app/Helper/FormatUang.php"],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
