@@ -1,1 +1,1 @@
-release: php artisan storage:link && php artisan optimize && php artisan config:clear && php artisan cache:clear
+release: composer install && php artisan storage:link && php artisan optimize && php artisan config:clear && php artisan cache:clear
