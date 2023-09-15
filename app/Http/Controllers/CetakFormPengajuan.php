@@ -27,8 +27,12 @@ class CetakFormPengajuan extends Controller
         return view('cetak.bukticair-cetak', compact('pengajuan', 'bukticairs'));
     }
 
-    public function laporan(){
-        $pengajuans      = Pengajuan::all();
+    public function laporan(Request $request){
+
+        $data = $request->input('data');
+        $dari = $data['dari'];
+        $sampai = $data['sampai'];
+        $pengajuans = Pengajuan::whereBetween('tanggaldiajukan', [$dari, $sampai])->get();
         return view('cetak.laporan-cetak', compact('pengajuans'));
     }
 }

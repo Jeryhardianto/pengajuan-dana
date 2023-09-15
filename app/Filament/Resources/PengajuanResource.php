@@ -57,7 +57,10 @@ class PengajuanResource extends Resource
 
                     Textarea::make('catatan')
                     ->autosize()
-                    ->label('Catatan'),
+                    ->label('Keterangan/Catatan')
+                    ->when(in_array(Auth::user()->dept_id, [2]), function ($component) {
+                        return $component->disabled();
+                    }),
 
                     Repeater::make('rincian')
                     ->relationship()
@@ -98,14 +101,14 @@ class PengajuanResource extends Resource
                     
                     TextInput::make('total_biaya')
                     ->required()
-                    ->disabled()
+                    ->hidden()
                     ->label('Total Biaya')
                     ->numeric(),
 
                     Textarea::make('catatan')
                     ->autosize()
                     ->disabled()
-                    ->label('Catatan'),
+                    ->label('Keterangan/Catatan'),
 
                     Repeater::make('rincian')
                     ->relationship()
@@ -200,11 +203,12 @@ class PengajuanResource extends Resource
                 })
             ])
             ->actions([
-                
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-             
+                Tables\Actions\EditAction::make()->visible(
+                    fn ($record) => !in_array($record->status, [Status::DITOLAK, Status::SELESAI, Status::CAIR])),
+                Tables\Actions\DeleteAction::make()->visible(
+                    fn ($record) => Auth::user()->dept_id == 1
+                                    && !in_array($record->status, [Status::DITOLAK, Status::SELESAI])),
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([

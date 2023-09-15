@@ -196,7 +196,9 @@ class EditPengajuan extends EditRecord
                Select::make('status')
                 ->label('Update Status')
                 ->options([
-                    Status::SETUJUDIREKTUR => Status::SETUJUDIREKTUR
+                    Status::SETUJUDIREKTUR => Status::SETUJUDIREKTUR,
+                    Status::DITOLAK => Status::DITOLAK
+
                 ] 
             )]
             )

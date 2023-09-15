@@ -15,6 +15,7 @@ use Filament\Tables\Filters\Filter;
 use Illuminate\Support\Facades\Auth;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Forms\Components\DatePicker;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\LaporanResource\Pages;
@@ -98,7 +99,8 @@ class LaporanResource extends Resource
                         );
                 })
              
-            ])
+            ], layout: FiltersLayout::AboveContent)
+            
             ->actions([
                 
                 // Tables\Actions\ViewAction::make()

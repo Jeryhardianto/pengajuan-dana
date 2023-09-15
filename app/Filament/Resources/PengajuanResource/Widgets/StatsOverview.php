@@ -10,6 +10,8 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
 class StatsOverview extends BaseWidget
 {
+
+ 
     protected function getStats(): array
     {
         if(in_array(Auth::user()->dept_id, [1,3])){
@@ -37,4 +39,5 @@ class StatsOverview extends BaseWidget
           
        }
     }
+   
 }
