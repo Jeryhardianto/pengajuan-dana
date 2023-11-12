@@ -27,7 +27,7 @@ class EditPengajuan extends EditRecord
 
         if(Auth::user()->dept_id == 1){
         
-           if($data->status != Status::CAIR){
+           if($data->status != Status::CAIR){ 
             return [
                 EditAction::make()
                 ->icon('heroicon-m-pencil-square')
@@ -141,7 +141,9 @@ class EditPengajuan extends EditRecord
                         ->label('Tanggal Cair'),
 
                         SpatieMediaLibraryFileUpload::make('bukti')
-                        ->label('Bukti Pencairan'),
+                        ->label('Bukti Pencairan')
+                        ->conversionsDisk('s3'),
+                        
                         ]),
 
             EditAction::make('update_status')
