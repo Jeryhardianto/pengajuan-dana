@@ -152,32 +152,39 @@ class PengajuanResource extends Resource
                     );
                 }
             ),
+            TextColumn::make('user.name')
+            ->label('Pengaju'),
+
             TextColumn::make('nama_kegiatan')->label('Nama Kegiatan')->limit('50')->searchable(),
             TextColumn::make('nama_pj')->label('Nama Penanggungjawab')->limit('50')->searchable(),
+          
+            TextColumn::make('status')->label('Status')
+            ->badge()
+            ->color(fn (string $state): string => match ($state) {
+                Status::MENUNGGU => 'gray',
+                Status::DIPERIKSA => 'warning',
+                Status::DITOLAK => 'danger',
+                Status::SETUJUFINANCE => 'success',
+                Status::SETUJUDIREKTUR => 'success',
+                Status::CAIR => 'success',
+                Status::SELESAI => 'success'
+
+            }),
+
+            SpatieMediaLibraryImageColumn::make('bukti')
+            ->label('Bukti Pencairan'),
+
             TextColumn::make('total_biaya')->label('Total Biaya')
             ->numeric(
                 decimalPlaces: 0,
                 decimalSeparator: '.',
                 thousandsSeparator: '.',
             ),
-            SpatieMediaLibraryImageColumn::make('bukti')
-            ->label('Bukti Pencairan'),
+      
             
-            TextColumn::make('user.name')
-            ->label('Pengaju'),
+           
             
-            TextColumn::make('status')->label('Status')
-                        ->badge()
-                        ->color(fn (string $state): string => match ($state) {
-                            Status::MENUNGGU => 'gray',
-                            Status::DIPERIKSA => 'warning',
-                            Status::DITOLAK => 'danger',
-                            Status::SETUJUFINANCE => 'success',
-                            Status::SETUJUDIREKTUR => 'success',
-                            Status::CAIR => 'success',
-                            Status::SELESAI => 'success'
-
-                        })
+        
 
            
                     ])
